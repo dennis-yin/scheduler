@@ -3,8 +3,8 @@ import React from "react";
 import "components/InterviewerListItem.scss";
 
 export default function InterviewerListItem(props) {
-  const itemClass = `list__item ${
-    props.selected ? "list__item--selected" : ""
+  const itemClass = `interviewers__item ${
+    props.selected ? "interviewers__item--selected" : ""
   }`;
 
   return (

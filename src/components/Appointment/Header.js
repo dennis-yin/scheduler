@@ -1,8 +1,6 @@
 import React from 'react';
 import "components/Appointment/styles.scss";
 
-import Appointment from "components/Appointment";
-
 export default function Header(props) {
   return (
     <header className="appointment__time">
