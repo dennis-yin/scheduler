@@ -3,61 +3,7 @@ import axios from "axios";
 import "components/Application.scss";
 import DayList from "components/DayList.js";
 import Appointment from "components/Appointment";
-
-const appointments = [
-  {
-    id: 1,
-    time: "12pm",
-  },
-  {
-    id: 2,
-    time: "1pm",
-    interview: {
-      student: "Lydia Miller-Jones",
-      interviewer: {
-        id: 1,
-        name: "Sylvia Palmer",
-        avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
-  },
-  {
-    id: 3,
-    time: "1:30pm",
-    interview: {
-      student: "Dennis Yin",
-      interviewer: {
-        id: 1,
-        name: "Sylvia Palmer",
-        avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
-  },
-  {
-    id: 4,
-    time: "2pm",
-    interview: {
-      student: "Joe Schmoe",
-      interviewer: {
-        id: 1,
-        name: "Sylvia Palmer",
-        avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
-  },
-  {
-    id: 5,
-    time: "3pm",
-    interview: {
-      student: "Jane Yo",
-      interviewer: {
-        id: 1,
-        name: "Sylvia Palmer",
-        avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
-  }
-];
+import getAppointmentsForDay from "../helpers/selectors";
 
 export default function Application(props) {
   const [state, setState] = useState({
@@ -65,18 +11,18 @@ export default function Application(props) {
     days: [],
     appointments: {}
   });
+  const appointments = getAppointmentsForDay(state, state.day);
   const apptComponents = appointments.map(appointment => <Appointment
     key={appointment.id} {...appointment}/>)
 
-  console.log(day)
+  const setDay = day => setState({ ...state, day });
 
   useEffect(() => {
-    axios.get("api/days")
-      .then(response => {
-        setDays(response.data)
-      })
-      .catch(error => {
-        console.log("Failed to retrieve data")
+    Promise.all([
+      axios.get("/api/days"),
+      axios.get("/api/appointments")
+    ]).then(all => {
+        setState(prev => ({ days: all[0].data, appointments: all[1].data }));
       })
   }, [])  // Pass empty array so that this request only runs once
 
