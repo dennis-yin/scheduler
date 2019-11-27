@@ -13,6 +13,8 @@ export default function Application(props) {
     interviewers: {}
   });
 
+  // console.log("DAY: ", state.day)
+
   const appointments = getAppointmentsForDay(state, state.day);
 
   const schedule = appointments.map((appointment) => {
@@ -40,7 +42,7 @@ export default function Application(props) {
       })
   }, [])  // Pass empty array so that this request only runs once
 
-  console.log(state.interviewers)
+  // console.log(state.interviewers)
 
   return (
     <main className="layout">
