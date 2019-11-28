@@ -8,31 +8,46 @@ import useVisualMode from "hooks/useVisualMode";
 
 import "./styles.scss";
 
-
 export default function Appointment(props) {
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
-  const { time, interview } = props
-  const { mode, transition, back } = useVisualMode(interview ? SHOW : EMPTY);
+  const SAVING = "SAVING";
+  const { mode, transition, back } = useVisualMode(
+    props.interview ? SHOW : EMPTY
+  );
+
+  // console.log("PROPS: ", props)
+  function save(name, interviewer) {
+    // console.log(`PERSON: ${name}, INTERVIEWER: ${interviewer}`)
+    transition(SAVING);
+    const interview = {
+      student: name,
+      interviewer
+    };
+    props.bookInterview(props.id, interview);
+    transition("SHOW");
+  }
 
   return (
     <main className="appointment">
-      <Header time={time} />
+      <Header time={props.time} />
       {mode === EMPTY && <Empty onAdd={prev => transition(CREATE)} />}
       {mode === SHOW && (
         <Show
-          aStudent={interview.student}
-          anInterviewer={interview.interviewer}
+          student={props.interview.student}
+          interviewer={props.interview.interviewer}
         />
       )}
       {mode === CREATE && (
         <Form
-          interviewers={[]}
-          onCancel={prev => transition(EMPTY)}
-          // onSave={prev => }
+          name={""}
+          interviewer={""}
+          interviewers={props.interviewers}
+          onCancel={() => back()}
+          onSave={(name, interviewer) => save(name, interviewer)}
         />
       )}
     </main>
-  )
+  );
 }
