@@ -22,3 +22,19 @@ export function getInterview(state, interview) {
     "interviewer": state.interviewers[interviewerId.toString()]
   }
 }
+
+// Seriously, rewrite this travesty of a function
+export function getInterviewersForDay(state, day) {
+  let results = [];
+  const theDay = state.days.filter(d => d.name === day);
+  if (theDay.length === 0) return results;
+  const appts = theDay[0].appointments;
+  console.log("APPTS", appts)
+  for (const appt of appts) {
+    const interview = state.appointments[appt.toString()].interview;
+    if (interview) {
+      results.push(state.interviewers[interview.interviewer.toString()]);
+    }
+  }
+  return results;
+}
