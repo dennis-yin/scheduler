@@ -1,12 +1,12 @@
 import React from "react";
 
-import Header from "components/Appointment/Header";
-import Show from "components/Appointment/Show";
-import Empty from "components/Appointment/Empty";
+import Header from "./Header";
+import Show from "./Show";
+import Empty from "./Empty";
 import Form from "./Form";
 import useVisualMode from "hooks/useVisualMode";
 
-import "components/Appointment/styles.scss";
+import "./styles.scss";
 
 
 export default function Appointment(props) {
@@ -15,11 +15,11 @@ export default function Appointment(props) {
   const CREATE = "CREATE";
   const { time, interview } = props
   const { mode, transition, back } = useVisualMode(interview ? SHOW : EMPTY);
-
+  console.log("MODE: ", mode)
   return (
     <main className="appointment">
       <Header time={time} />
-      {mode === EMPTY && <Empty onAdd={transition(CREATE)} />}
+      {mode === EMPTY && <Empty onAdd={prev => transition(CREATE)} />}
       {mode === SHOW && (
         <Show
           aStudent={interview.student}
