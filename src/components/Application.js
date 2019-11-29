@@ -44,7 +44,16 @@ export default function Application(props) {
           appointments
         });
       })
-      .catch(err => console.log("ERROR :", err));
+      .catch(err => console.log("Error creating appointment :", err));
+  }
+
+  function cancelInterview(id) {
+    return axios
+      .delete(`api/appointments/${id}`)
+      .then(() => {
+        return;
+      })
+      .catch(err => console.log("Error deleting appointment: ", err));
   }
 
   const appointments = getAppointmentsForDay(state, state.day);
@@ -60,6 +69,7 @@ export default function Application(props) {
         interview={interview}
         interviewers={interviewers}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     );
   });
