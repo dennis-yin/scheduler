@@ -6,6 +6,7 @@ import Empty from "./Empty";
 import Form from "./Form";
 import Status from "./Status";
 import Confirm from "./Confirm";
+import Error from "./Error";
 import useVisualMode from "hooks/useVisualMode";
 
 import "./styles.scss";
@@ -46,8 +47,6 @@ export default function Appointment(props) {
       .catch(error => transition(ERROR_DELETE, true));
   }
 
-  console.log("PROPS:", props);
-
   return (
     <main className="appointment">
       <Header time={props.time} />
@@ -80,6 +79,8 @@ export default function Appointment(props) {
           onSave={(name, interviewer) => save(name, interviewer)}
         />
       )}
+      {mode === ERROR_SAVE && <Error message="Error when saving" />}
+      {mode === ERROR_DELETE && <Error message="Error when deleting" />}
     </main>
   );
 }

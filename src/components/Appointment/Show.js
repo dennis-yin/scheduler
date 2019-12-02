@@ -3,7 +3,6 @@ import "components/Appointment/styles.scss";
 
 export default function Show(props) {
   const { student, interviewer, onEdit, onDelete } = props;
-  // console.log(`STUDENT: ${student}, INTERVIEWER: ${interviewer}`);
 
   return (
     <main className="appointment__card appointment__card--show">
