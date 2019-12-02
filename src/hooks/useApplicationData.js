@@ -81,7 +81,11 @@ export default function useApplicationData() {
     return axios
       .delete(`api/appointments/${id}`)
       .then(() => {
-        return;
+        dispatch({
+          type: SET_INTERVIEW,
+          id,
+          interview: null
+        });
       })
       .catch(err => console.log("Error deleting appointment: ", err));
   }
