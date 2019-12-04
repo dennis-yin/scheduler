@@ -2,8 +2,8 @@
 
 ## Final Product
 
-!["View appointments"]()
-!["Book appointment"]()
+!["View appointments"](https://github.com/dennis-yin/scheduler/blob/master/docs/Show-page.png)
+!["Book appointment"](https://github.com/dennis-yin/scheduler/blob/master/docs/Book-interview.png)
 
 ## Setup
 
