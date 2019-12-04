@@ -1,5 +1,10 @@
 # Interview Scheduler
 
+## Final Product
+
+!["View appointments"]()
+!["Book appointment"]()
+
 ## Setup
 
 Install dependencies with `npm install`.
