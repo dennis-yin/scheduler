@@ -34,13 +34,15 @@ export default function reducer(state, action) {
       if (action.id >= 16 && action.id <= 20) day = 3;
       if (action.id >= 21 && action.id <= 25) day = 4;
 
-      let days;
-      if (action.book) {
-        days = [...state.days];
-        days[day].spots--;
+      let days = [...state.days];
+      if (action.edit) {
+        return { ...state, appointments, days };
       } else {
-        days = [...state.days];
-        days[day].spots++;
+        if (action.isBooking) {
+          days[day].spots--;
+        } else {
+          days[day].spots++;
+        }
       }
 
       return { ...state, appointments, days };

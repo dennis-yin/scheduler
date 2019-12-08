@@ -32,7 +32,7 @@ export default function useApplicationData() {
     });
   }, []); // Pass empty array so that this request only runs once
 
-  function bookInterview(id, interview) {
+  function bookInterview(id, interview, isEdit = false) {
     return axios
       .put(`/api/appointments/${id}`, { interview })
       .then(() => {
@@ -40,7 +40,8 @@ export default function useApplicationData() {
           type: SET_INTERVIEW,
           id,
           interview,
-          book: true
+          edit: isEdit,
+          isBooking: true
         });
       })
       .catch(err => console.log("Error creating appointment :", err));
@@ -54,7 +55,7 @@ export default function useApplicationData() {
           type: SET_INTERVIEW,
           id,
           interview: null,
-          book: false
+          isBooking: false
         });
       })
       .catch(err => console.log("Error deleting appointment: ", err));

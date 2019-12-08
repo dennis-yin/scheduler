@@ -19,13 +19,14 @@ export default function Appointment(props) {
   const DELETING = "DELETING";
   const CONFIRM = "CONFIRM";
   const EDIT = "EDIT";
+  const IS_EDIT = true;
   const ERROR_SAVE = "ERROR_SAVE";
   const ERROR_DELETE = "ERROR_DELETE";
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
 
-  function save(name, interviewer) {
+  function save(name, interviewer, isEdit = false) {
     const interview = {
       student: name,
       interviewer
@@ -34,7 +35,7 @@ export default function Appointment(props) {
     transition(SAVING);
 
     props
-      .bookInterview(props.id, interview)
+      .bookInterview(props.id, interview, isEdit)
       .then(() => transition(SHOW))
       .catch(error => transition(ERROR_SAVE, true));
   }
@@ -76,7 +77,7 @@ export default function Appointment(props) {
           interviewer={props.interview.interviewer.id}
           interviewers={props.interviewers}
           onCancel={() => back()}
-          onSave={(name, interviewer) => save(name, interviewer)}
+          onSave={(name, interviewer) => save(name, interviewer, IS_EDIT)}
         />
       )}
       {mode === CONFIRM && (
