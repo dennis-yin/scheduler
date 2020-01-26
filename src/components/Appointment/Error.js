@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import "components/Appointment/styles.scss";
 
 export default function Error(props) {
@@ -14,6 +14,6 @@ export default function Error(props) {
         alt="Close"
         onClick={props.onClose}
       />
-    </main>  
-  )
+    </main>
+  );
 }

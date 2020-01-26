@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import "components/Appointment/styles.scss";
 
 export default function Status(props) {
@@ -10,6 +10,6 @@ export default function Status(props) {
         alt="Loading"
       />
       <h1 className="text--semi-bold">{props.message}</h1>
-    </main>  
-  )
+    </main>
+  );
 }

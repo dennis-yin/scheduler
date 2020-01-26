@@ -19,7 +19,9 @@ export default function reducer(state, action) {
     case SET_INTERVIEW: {
       const appointment = {
         ...state.appointments[action.id],
-        interview: action.interview && { ...action.interview }
+        interview: action.interview && {
+          ...action.interview
+        }
       };
 
       const appointments = {
@@ -36,7 +38,11 @@ export default function reducer(state, action) {
 
       let days = [...state.days];
       if (action.edit) {
-        return { ...state, appointments, days };
+        return {
+          ...state,
+          appointments,
+          days
+        };
       } else {
         if (action.isBooking) {
           days[day].spots--;
@@ -45,7 +51,11 @@ export default function reducer(state, action) {
         }
       }
 
-      return { ...state, appointments, days };
+      return {
+        ...state,
+        appointments,
+        days
+      };
     }
     default:
       throw new Error(
